@@ -1,21 +1,29 @@
-services:
+version: '3.9'
+services: 
   mysql:
-    image: mysql:9.2
+    image: mysql:8.0
+    container_name: mysql-db
+    volumes:
+      - mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
-      - MYSQL_USER=petclinic
-      - MYSQL_PASSWORD=petclinic
-      - MYSQL_DATABASE=petclinic
-    volumes:
-      - "./conf.d:/etc/mysql/conf.d:ro"
-  postgres:
-    image: postgres:17.5
-    ports:
-      - "5432:5432"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: petclinic
+      MYSQL_PASSWORD: petclinic
+      MYSQL_DATABASE: petclinic
+
+  petclinic-app:
+    build:  .
+    container_name: petclinic-app
     environment:
-      - POSTGRES_PASSWORD=petclinic
-      - POSTGRES_USER=petclinic
-      - POSTGRES_DB=petclinic
+      spring.datasource.url: "jdbc:mysql://mysql:3306/petclinic"
+      spring.datasource.username: petclinic
+      spring.datasource.password: petclinic
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
