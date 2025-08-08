@@ -8,9 +8,9 @@ pipeline {
                         userRemoteConfigs: [[url: 'https://github.com/Ji-noha/spring-petclinic-app.git']]])
             }
         }
-        stage('Build'){
+        stage('Build and Test'){
             steps {
-                sh './mvnw clean package -DskipTests'
+                sh './mvnw clean install'
             }
         }
         
