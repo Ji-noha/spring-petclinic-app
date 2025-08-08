@@ -3,7 +3,9 @@ pipeline {
     stages{
         stage('checkout'){
             steps {
-                git 'https://github.com/Ji-noha/spring-petclinic-app.git'
+                checkout([$class: 'GitSCM', 
+                        branches: [[name: 'refs/heads/main']], 
+                        userRemoteConfigs: [[url: 'https://github.com/Ji-noha/spring-petclinic-app.git']]])
             }
         }
         stage('Build'){
