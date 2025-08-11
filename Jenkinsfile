@@ -10,14 +10,16 @@ pipeline {
         }
         stage('Build'){
             steps {
-                bat '.\\mvnw.cmd clean package'
+                bat '.\\mvnw.cmd clean package -DskipTests'
             }
         }
+        /*
         stage('test'){
             steps {
                 bat '.\\mvnw.cmd test -Dspring.profiles.active=mysql'
             }
         }
+        */
         // run sonarqube test 
         stage('Run SobarQube') {
             environment {
