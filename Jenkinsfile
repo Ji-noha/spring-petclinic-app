@@ -8,9 +8,14 @@ pipeline {
                         userRemoteConfigs: [[url: 'https://github.com/Ji-noha/spring-petclinic-app.git']]])
             }
         }
-        stage('Build and Test'){
+        stage('Build'){
             steps {
-                bat '.\\mvnw.cmd clean install'
+                bat '.\\mvnw.cmd clean package'
+            }
+        }
+        stage('test'){
+            steps {
+                bat '.\\mvnw.cmd test -Dspring.profiles.active=mysql'
             }
         }
         // run sonarqube test 
