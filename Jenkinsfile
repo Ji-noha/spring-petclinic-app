@@ -13,6 +13,16 @@ pipeline {
                 bat '.\\mvnw.cmd clean install'
             }
         }
+        // run sonarqube test 
+        stage('Run SobarQube') {
+            environment {
+                scannerHome = tool 'spring_pet_tool'
+            }
+            steps {
+                withSonarQubeEnv('spring_pet_server')
+                bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=petclinic_1"
+            }
+        }
         
     }
 }
