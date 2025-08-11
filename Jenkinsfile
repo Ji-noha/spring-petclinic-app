@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Build and Test'){
             steps {
-                sh './mvnw clean install'
+                bat '.\\mvnw.cmd clean install'
             }
         }
         
