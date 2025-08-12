@@ -27,7 +27,7 @@ pipeline {
                     }
                     steps {
                         withSonarQubeEnv('spring_pet_server') {
-                            bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=petclinic_1"
+                            bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=11"
                         }
                     }
             }
