@@ -50,7 +50,7 @@ import org.testcontainers.DockerClientFactory;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = { "spring.docker.compose.skip.in-tests=false", //
 		"spring.docker.compose.start.arguments=--force-recreate,--renew-anon-volumes,postgres" })
-@ActiveProfiles("postgres")
+@ActiveProfiles("mysql")
 @DisabledInNativeImage
 public class PostgresIntegrationTests {
 
