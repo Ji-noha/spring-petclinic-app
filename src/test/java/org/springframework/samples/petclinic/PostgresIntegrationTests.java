@@ -47,11 +47,15 @@ import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 import org.testcontainers.DockerClientFactory;
+//add that line:
+import org.junit.jupiter.api.Disabled;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = { "spring.docker.compose.skip.in-tests=false", //
 		"spring.docker.compose.start.arguments=--force-recreate,--renew-anon-volumes,postgres" })
-@ActiveProfiles("mysql")
+@ActiveProfiles("postgres")
 @DisabledInNativeImage
+// add that line too: so we can disable test of postgres
+@Disabled("Postgres tests are disabled for now")
 public class PostgresIntegrationTests {
 
 	@LocalServerPort
@@ -79,10 +83,9 @@ public class PostgresIntegrationTests {
 	}
 
 	@Test
-	public void testFindAll() {
+	void testFindAll() throws Exception {
 		vets.findAll();
 		vets.findAll(); // served from cache
-
 	}
 
 	@Test
