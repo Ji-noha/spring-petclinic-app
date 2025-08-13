@@ -16,7 +16,7 @@ pipeline {
         
         stage('test'){
             steps {
-                bat '.\\mvnw.cmd test -Dspring.profiles.active=mysql'
+                bat '.\\mvnw.cmd clean test '
             }
         }
         /*
