@@ -41,9 +41,6 @@ pipeline {
                 bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_LOGIN%"
             }
         }
-    }
-
-    
         stage('Cleanup SonarQube') {
             steps {
                 bat 'docker stop sonarqube || exit 0'
@@ -53,5 +50,9 @@ pipeline {
                 expression { true }
             }
         }
+    }
+
+    
+    
     
 }
