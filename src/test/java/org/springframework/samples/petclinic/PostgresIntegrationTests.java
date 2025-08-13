@@ -70,9 +70,9 @@ public class PostgresIntegrationTests {
 
 	public static void main(String[] args) {
 		new SpringApplicationBuilder(PetClinicApplication.class) //
-			.profiles("postgres") //
+			.profiles("mysql") //
 			.properties( //
-					"spring.docker.compose.start.arguments=postgres" //
+					"spring.docker.compose.start.arguments=mysql" //
 			) //
 			.listeners(new PropertiesLogger()) //
 			.run(args);
