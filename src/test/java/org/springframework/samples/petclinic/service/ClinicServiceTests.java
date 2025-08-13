@@ -71,6 +71,7 @@ import org.springframework.transaction.annotation.Transactional;
 // Ensure that if the mysql profile is active we connect to the real database:
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 // @TestPropertySource("/application-postgres.properties")
+@springBootTest(classes=ClinicServiceTests.class)
 class ClinicServiceTests {
 
 	@Autowired
