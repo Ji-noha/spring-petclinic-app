@@ -13,13 +13,13 @@ pipeline {
                 bat '.\\mvnw.cmd clean package -DskipTests'
             }
         }
-        /*
+        
         stage('test'){
             steps {
                 bat '.\\mvnw.cmd test -Dspring.profiles.active=mysql'
             }
         }
-        
+        /*
         // run sonarqube test 
             stage('Run SonarQube') {
                     environment {
