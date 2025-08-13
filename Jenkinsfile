@@ -4,7 +4,6 @@ pipeline {
     environment {
         SONAR_PROJECT_KEY = '11'
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_LOGIN = credentials('spring_pet')
         scannerHome = tool 'spring_pet_tool'
     }
 
@@ -38,6 +37,7 @@ pipeline {
 
         stage('Run SonarQube') {
             steps {
+                withCredentials([string(credentialsId: '1', variable: 'SONAR_TOKEN')])
                 bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_LOGIN%"
             }
         }
