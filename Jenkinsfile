@@ -45,8 +45,10 @@ pipeline {
 
     post {
         always {
-            bat 'docker stop sonarqube || exit 0'
-            bat 'docker rm sonarqube || exit 0'
+            node {
+                bat 'docker stop sonarqube || exit 0'
+                bat 'docker rm sonarqube || exit 0'
+            }
         }
     }
 }
