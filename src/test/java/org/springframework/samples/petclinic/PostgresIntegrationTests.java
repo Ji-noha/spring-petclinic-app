@@ -80,15 +80,8 @@ public class PostgresIntegrationTests {
 
 	@Test
 	public void testFindAll() {
-		try {
-			vets.findAll();
-		    vets.findAll(); // served from cache
-		} catch (Exception e) {
-			System.err.printIn("Error processing data:" e);
-		} finally {
-			vets.findAll();
-		    vets.findAll(); // served from cache
-		}
+		vets.findAll();
+		vets.findAll(); // served from cache
 
 	}
 
