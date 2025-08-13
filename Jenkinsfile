@@ -37,8 +37,9 @@ pipeline {
 
         stage('Run SonarQube') {
             steps {
-                withCredentials([string(credentialsId: '1', variable: 'SONAR_TOKEN')])
-                bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_LOGIN%"
+                withCredentials([string(credentialsId: '1', variable: 'SONAR_TOKEN')]){
+                    bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_LOGIN%"
+                }
             }
         }
         stage('Cleanup SonarQube') {
