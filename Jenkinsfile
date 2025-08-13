@@ -4,7 +4,7 @@ pipeline {
     environment {
         SONAR_PROJECT_KEY = '11'
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_LOGIN = credentials('1')
+        SONAR_LOGIN = credentials('spring_pet')
         scannerHome = tool 'spring_pet_tool'
     }
 
@@ -19,14 +19,14 @@ pipeline {
 
         stage('Start SonarQube') {
             steps {
-                bat 'docker run -d --name sonarqube -p 9000:9000 sonarqube:10.3-community'
+                bat 'docker run -d --name sonarqube -p 9000:9000 sonarqube'
                 bat 'timeout /t 30'
             }
         }
 
         stage('Build') {
             steps {
-                bat '.\\mvnw.cmd clean package -DskipTests'
+                bat '.\\mvnw.cmd package -DskipTests'
             }
         }
 
