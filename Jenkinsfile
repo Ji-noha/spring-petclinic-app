@@ -45,10 +45,12 @@ pipeline {
 
     post {
         always {
-            agent any
             steps {
                 bat 'docker stop sonarqube || exit 0'
                 bat 'docker rm sonarqube || exit 0'
+            }
+            when {
+                expression { true }
             }
         }
     }
