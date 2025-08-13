@@ -84,7 +84,10 @@ public class PostgresIntegrationTests {
 			vets.findAll();
 		    vets.findAll(); // served from cache
 		} catch (Exception e) {
-			System.err.printIn("Error processing data:" +e.getMesssage());
+			System.err.printIn("Error processing data:" e);
+		} finally {
+			vets.findAll();
+		    vets.findAll(); // served from cache
 		}
 
 	}
