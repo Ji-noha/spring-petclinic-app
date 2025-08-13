@@ -18,7 +18,7 @@ pipeline {
 
         stage('Start SonarQube') {
             steps {
-                bat 'docker run -d --name sonarqube -p 9000:9000 sonarqube'
+                bat 'docker run -d --name sonarqube_pipe -p 9000:9000 sonarqube'
                 bat 'timeout /t 30'
             }
         }
