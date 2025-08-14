@@ -5,6 +5,7 @@ pipeline {
         SONAR_PROJECT_KEY = '11'
         SONAR_HOST_URL = 'http://localhost:9000'
         scannerHome = tool 'spring_pet_tool'
+        SONAR_TOKEN='pet_token'
     }
 
     stages {
@@ -18,7 +19,7 @@ pipeline {
 
         stage('Start SonarQube') {
             steps {
-                bat 'docker run -d --name sonarqube100 -p 9000:9000 sonarqube'
+                bat 'docker run -d --name sonarqube10 -p 9000:9000 sonarqube'
                 sleep 30
             }
         }
@@ -38,7 +39,7 @@ pipeline {
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: '1', variable: 'SONAR_TOKEN')]){
-                    bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.login=%SONAR_LOGIN%"
+                    bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.token=%SONAR_TOKEN%"
                 }
             }
         }
