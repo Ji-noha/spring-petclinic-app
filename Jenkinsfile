@@ -18,8 +18,8 @@ pipeline {
 
         stage('Start SonarQube') {
             steps {
-                bat 'docker run -d --name sonarqube13 -p 9000:9000 sonarqube'
-                sleep 30
+                bat 'docker run -d --name sonarqube14 -p 9000:9000 sonarqube'
+                sleep 60
             }
         }
 
