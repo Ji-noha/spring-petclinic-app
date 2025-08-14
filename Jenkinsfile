@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SONAR_PROJECT_KEY = '11'
+        SONAR_PROJECT_KEY = 'pet_'
         SONAR_HOST_URL = 'http://localhost:9000'
         scannerHome = tool 'spring_pet_tool'
     }
