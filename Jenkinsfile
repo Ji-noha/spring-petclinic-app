@@ -18,7 +18,7 @@ pipeline {
 
         stage('Start SonarQube') {
             steps {
-                bat 'docker run -d --name sonarqube11 -p 9000:9000 sonarqube'
+                bat 'docker run -d --name sonarqube12 -p 9000:9000 sonarqube'
                 sleep 30
             }
         }
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Run SonarQube') {
             steps {
-                withCredentials([string(credentialsId: 'pet_token', variable: 'SONAR_TOKEN')]){
+                withCredentials([string(credentialsId: 'spring_pet_server', variable: 'SONAR_TOKEN')]){
                     bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.token=%SONAR_TOKEN%"
                 }
             }
