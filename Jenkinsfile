@@ -15,14 +15,14 @@ pipeline {
                         userRemoteConfigs: [[url: 'https://github.com/Ji-noha/spring-petclinic-app.git']]])
             }
         }
-
+/*
         stage('Start SonarQube') {
             steps {
                 bat 'docker run -d --name sonarqube15 -p 9000:9000 sonarqube'
-                sleep 60
+                sleep 30
             }
         }
-
+*/
         stage('Build') {
             steps {
                 bat '.\\mvnw.cmd package -DskipTests'
@@ -37,11 +37,12 @@ pipeline {
 
         stage('Run SonarQube') {
             steps {
-                withCredentials([string(credentialsId: 'jenkins-token', variable: 'SONAR_TOKEN')]){
+                withCredentials([string(credentialsId: 'new-token', variable: 'SONAR_TOKEN')]){
                     bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.token=%SONAR_TOKEN%"
                 }
             }
         }
+        /*
         stage('Cleanup SonarQube') {
             steps {
                 bat 'docker stop sonarqube || exit 0'
@@ -51,6 +52,7 @@ pipeline {
                 expression { true }
             }
         }
+        */
     }
 
     
