@@ -33,11 +33,29 @@ pipeline {
                 bat '.\\mvnw.cmd clean test'
             }
         }
-
+        /*
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]){
                     bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.token=%SONAR_TOKEN% -Dsonar.java.binaries=target/classes"
+                }
+            }
+        }
+        */
+        stage('Run SonarQube') {
+            steps {
+                withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
+                    script {
+                        docker.image('sonarsource/sonar-scanner-cli').inside {
+                        bat """
+                        sonar-scanner ^
+                        -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
+                        -Dsonar.host.url=%SONAR_HOST_URL% ^
+                        -Dsonar.login=%SONAR_TOKEN% ^
+                        -Dsonar.java.binaries=target\\classes
+                        """
+                        }
+                    }
                 }
             }
         }
