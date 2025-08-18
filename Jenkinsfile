@@ -67,14 +67,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 bat '''
-                docker run --rm ^
-                -v "%cd%:/usr/src" ^
-                -e SONAR_HOST_URL= http://localhost:9000/ ^
-                -e SONAR_LOGIN=sonar_token ^
-                sonarsource/sonar-scanner-cli ^
-                -Dsonar.projectKey=pet_ ^
-                -Dsonar.sources=. ^
-                -Dsonar.java.binaries=target/classes
+                docker run --rm -v "%cd%:/usr/src" -e SONAR_HOST_URL= http://localhost:9000 -e SONAR_LOGIN=sonar_token sonarsource/sonar-scanner-cli -Dsonar.projectKey=pet_ -Dsonar.sources=. -Dsonar.java.binaries=target/classes
                 '''
             }
         }
