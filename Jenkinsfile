@@ -59,7 +59,7 @@ pipeline {
             steps {
                 // Inject SonarQube environment variables automatically
                 withSonarQubeEnv('spring_pet_server') {
-                    sh 'sonar-scanner'
+                    bat 'sonar-scanner'
                 }
             }
         } 
