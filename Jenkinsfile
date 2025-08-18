@@ -45,19 +45,17 @@ pipeline {
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
-                    script {
-                        docker.image('sonarsource/sonar-scanner-cli').inside {
                         bat """
                         docker run --rm -e SONAR_HOST_URL=%SONAR_HOST_URL% -e SONAR_LOGIN=%SONAR_TOKEN% -v "%cd%:/usr/src" sonarsource/sonar-scanner-cli ^
                             -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
                             -Dsonar.sources=. ^
                             -Dsonar.java.binaries=target\\classes
                         """
-                        }
-                    }
                 }
             }
         }
+            
+        
 
         stage('Push Image') {
             steps {
