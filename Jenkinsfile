@@ -63,7 +63,7 @@ pipeline {
                 }
             }
         } 
-        */
+        
         stage('SonarQube Analysis') {
             steps {
                 bat '''
@@ -72,6 +72,24 @@ pipeline {
                 -Dsonar.sources=. ^
                 -Dsonar.java.binaries=target/classes
                 '''
+            }
+        }
+        */
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    docker.image('sonarsource/sonar-scanner-cli').inside {
+                        bat """
+                            sonar-scanner ^
+                            -Dsonar.projectKey=YOUR_PROJECT_KEY ^
+                            -Dsonar.sources=. ^
+                            -Dsonar.java.binaries=target/classes ^
+                            -Dsonar.host.url=http://192.168.8.169:9000 ^
+                            -Dsonar.login=YOUR_SONAR_TOKEN ^
+                            -Dcheckstyle.skip=true
+                        """
+                    }
+                }
             }
         }
 
