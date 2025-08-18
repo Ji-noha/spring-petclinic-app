@@ -58,7 +58,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 // Inject SonarQube environment variables automatically
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('spring_pet_server') {
                     sh 'sonar-scanner'
                 }
             }
