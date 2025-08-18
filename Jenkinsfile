@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SONAR_PROJECT_KEY = credentials('pet_')
+        SONAR_PROJECT_KEY = credentials('psonar_project_key')
         SONAR_HOST_URL = credentials('sonar_host_url')
         scannerHome = credentials('scanner_home')
         REGISTRY = credentials('docker_registry')
