@@ -41,7 +41,7 @@ pipeline {
                 }
             }
         }
-        */
+        //
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
@@ -54,7 +54,15 @@ pipeline {
                 }
             }
         }
-            
+        */
+        stage('SonarQube Analysis') {
+            steps {
+                // Inject SonarQube environment variables automatically
+                withSonarQubeEnv(SONARQUBE_SERVER) {
+                    sh 'sonar-scanner'
+                }
+            }
+        } 
         
 
         stage('Push Image') {
