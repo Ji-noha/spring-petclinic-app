@@ -58,7 +58,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 // Inject SonarQube environment variables automatically
-                withSonarQubeEnv(SONARQUBE_SERVER) {
+                withSonarQubeEnv('SonarQube') {
                     sh 'sonar-scanner'
                 }
             }
