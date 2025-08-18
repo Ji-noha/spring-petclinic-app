@@ -48,11 +48,10 @@ pipeline {
                     script {
                         docker.image('sonarsource/sonar-scanner-cli').inside {
                         bat """
-                        sonar-scanner ^
-                        -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
-                        -Dsonar.host.url=%SONAR_HOST_URL% ^
-                        -Dsonar.login=%SONAR_TOKEN% ^
-                        -Dsonar.java.binaries=target\\classes
+                        docker run --rm -e SONAR_HOST_URL=%SONAR_HOST_URL% -e SONAR_LOGIN=%SONAR_TOKEN% -v "%cd%:/usr/src" sonarsource/sonar-scanner-cli ^
+                            -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
+                            -Dsonar.sources=. ^
+                            -Dsonar.java.binaries=target\\classes
                         """
                         }
                     }
