@@ -46,7 +46,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
                         bat """
-                        docker run --rm -e SONAR_HOST_URL=https://host.docker.internal:9000 -e SONAR_LOGIN=%SONAR_TOKEN% -v "%cd%:/usr/src" sonarsource/sonar-scanner-cli ^
+                        docker run --rm -e SONAR_HOST_URL=http://host.docker.internal:9000 -e SONAR_LOGIN=%SONAR_TOKEN% -v "%cd%:/usr/src" sonarsource/sonar-scanner-cli ^
                             -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
                             -Dsonar.sources=. ^
                             -Dsonar.java.binaries=target\\classes
