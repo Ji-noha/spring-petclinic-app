@@ -69,7 +69,7 @@ pipeline {
                 bat '''
                 docker run --rm ^
                 -v "%cd%:/usr/src" ^
-                -e SONAR_HOST_URL=http://host.docker.internal:9000 ^
+                -e SONAR_HOST_URL=http://127.0.0.1:9000 ^
                 -e SONAR_LOGIN=sonar_token ^
                 sonarsource/sonar-scanner-cli ^
                 -Dsonar.projectKey=pet_ ^
