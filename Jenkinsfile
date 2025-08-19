@@ -105,7 +105,12 @@ pipeline {
             }
         
         }
-
+        
+        stage('Check Railway') {
+            steps {
+                bat 'railway --version'
+            }
+        }
         stage('Deploy to Railway') {
             steps {
                 withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
