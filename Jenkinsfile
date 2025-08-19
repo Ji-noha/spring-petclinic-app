@@ -96,7 +96,7 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                withDockerRegistry([credentialsId: 'dockerhub-cred', url: "https://$REGISTRY"]) {
+                withDockerRegistry([credentialsId: 'dockerhub-cred', url: 'https://index.docker.io/v1/']) {
                    // bat "docker push %REGISTRY/%DOCKER_IMAGE%"
                     bat """
                         docker push ${REGISTRY}/${DOCKER_IMAGE}
