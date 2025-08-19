@@ -24,7 +24,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat '.\\mvnw.cmd package -DskipTests -Dcheckstyle.skip=true'
+                bat '.\\mvnw.cmd package -DskipTests -Dcheckstyle.skip=true -U'
             }
         }
 
