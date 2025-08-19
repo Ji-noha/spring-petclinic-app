@@ -115,8 +115,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
                     bat """
-                        C:\\tools\\.railway\\railway.cmd login --token %RAILWAY_TOKEN%
-                        C:\\tools\\.railway\\railway.cmd up --service %SERVICE_NAME% --detach
+                        C:\\tools\\railway.cmd login --token %RAILWAY_TOKEN%
+                        C:\\tools\\railway.cmd up --service %SERVICE_NAME% --detach
                     """
                 }
             }
