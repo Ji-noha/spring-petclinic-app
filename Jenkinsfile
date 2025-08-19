@@ -105,12 +105,7 @@ pipeline {
             }
         
         }
-        
-        stage('Check Railway') {
-            steps {
-                bat 'railway --version'
-            }
-        }
+        /*
         stage('Deploy to Railway') {
             steps {
                 withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
@@ -118,6 +113,19 @@ pipeline {
                         C:\\tools\\railway.cmd login --token %RAILWAY_TOKEN%
                         C:\\tools\\railway.cmd up --service %SERVICE_NAME% --detach
                     """
+                }
+            }
+        }
+        */
+        stage('Deploy to Railway') {
+            steps {
+                withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
+                bat """
+                    docker run --rm -e RAILWAY_TOKEN=%RAILWAY_TOKEN% -e SERVICE_NAME=%SERVICE_NAME% node:20-alpine cmd /c ^
+                    "npm install -g @railway/cli && ^
+                    railway login --token %RAILWAY_TOKEN% && ^
+                    railway up --service %SERVICE_NAME% --detach"
+                """
                 }
             }
         }
