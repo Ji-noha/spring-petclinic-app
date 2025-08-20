@@ -100,6 +100,7 @@ pipeline {
                    // bat "docker push %REGISTRY/%DOCKER_IMAGE%"
                     bat """
                         docker context use default
+                        docker build -t noha04/pet-app:latest .
                         docker push noha04/pet-app:latest
                     """
                 }
