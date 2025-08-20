@@ -99,7 +99,8 @@ pipeline {
                 withDockerRegistry([credentialsId: 'dockerhub-cred', url: 'https://index.docker.io/v1/']) {
                    // bat "docker push %REGISTRY/%DOCKER_IMAGE%"
                     bat """
-                        docker push ${REGISTRY}/${DOCKER_IMAGE}
+                        docker context use default
+                        docker push noha04/pet-app:latest
                     """
                 }
             }
