@@ -121,10 +121,10 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
                 bat """
-                    docker run --rm -e RAILWAY_TOKEN=%RAILWAY_TOKEN% -e SERVICE_NAME=%SERVICE_NAME% node:20-alpine cmd /c ^
-                    "npm install -g @railway/cli && ^
-                    railway login --token %RAILWAY_TOKEN% && ^
-                    railway up --service %SERVICE_NAME% --detach"
+                    docker run --rm ^
+                    -e RAILWAY_TOKEN=%RAILWAY_TOKEN% ^
+                    -e SERVICE_NAME=%SERVICE_NAME% ^
+                    node:20-alpine sh -c "npm install -g @railway/cli && railway login --token $RAILWAY_TOKEN && railway up --service $SERVICE_NAME --detach"
                 """
                 }
             }
