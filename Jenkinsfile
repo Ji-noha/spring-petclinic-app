@@ -37,7 +37,13 @@ pipeline {
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]){
-                    bat "\"${scannerHome}\\bin\\sonar-scanner.bat\" -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.token=%SONAR_TOKEN% -Dsonar.java.binaries=target/classes"
+                    script {
+                        // Get the installed scanner path
+                        def scannerHome = tool name: 'spring_pet_tool', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                
+                        // Use single quotes in bat to avoid Groovy interpolation
+                        bat "${scannerHome}\\bin\\sonar-scanner.bat -Dsonar.projectKey=%SONAR_PROJECT_KEY% -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.token=%SONAR_TOKEN% -Dsonar.java.binaries=target/classes"
+                    }
                 }
             }
         }
