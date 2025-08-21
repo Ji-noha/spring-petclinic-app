@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    environment {
+        RAILWAY_TOKEN = credentials('railway-api-token') // Jenkins Secret Text credential ID
+        SERVICE_NAME = 'spring-petclinic-app'            // Railway service name
+    }
+
+    stages {
+        stage('Test Railway Deploy') {
+            steps {
+                bat """
+                echo Logging into Railway
+                railway login
+                echo Deploying service
+                railway up --service %SERVICE_NAME% --detach
+                """
+            }
+        }
+    }
+}
