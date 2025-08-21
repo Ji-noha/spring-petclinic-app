@@ -2,13 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SONAR_PROJECT_KEY = credentials('sonar_project_key')
-        SONAR_HOST_URL = credentials('sonar_host_url')
-        scannerHome = credentials('scanner_home')
         REGISTRY = credentials('docker_registry')
         DOCKER_IMAGE = credentials('docker_image')
-        RAILWAY_TOKEN = credentials('railway-api-token')
-        SERVICE_NAME = credentials('service_name')
     }
 
     stages {
@@ -51,38 +46,6 @@ pipeline {
                 }
             }
         
-        }
-        /*
-        stage('Deploy to Railway') {
-            steps {
-                withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
-                    bat """
-                        C:\\tools\\railway.cmd login --token %RAILWAY_TOKEN%
-                        C:\\tools\\railway.cmd up --service %SERVICE_NAME% --detach
-                    """
-                }
-            }
-        }
-        
-        stage('Deploy to Railway') {
-            steps {
-                withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
-                bat """
-                    set RAILWAY_TOKEN=%RAILWAY_TOKEN%
-                    railway whoami
-                    railway up
-                """
-                }
-            }
-        }
-
-    
-    }
-    */
-        stage('Deploy') {
-            steps {
-                bat 'docker-compose up -d'
-            }
         }
     }
 
