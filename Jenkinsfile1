@@ -1,13 +1,7 @@
 pipeline {
     agent any
-
-    environment {
-        RAILWAY_TOKEN = credentials('railway-api-token') // Jenkins Secret Text credential ID
-        SERVICE_NAME = 'spring-petclinic-app'            // Railway service name
-    }
-
     stages {
-         stage('Deploy to Railway') {
+        stage('Deploy to Railway') {
             steps {
                 withCredentials([string(credentialsId: 'RAILWAY_TOKEN', variable: 'TOKEN')]) {
                     bat """
@@ -18,4 +12,5 @@ pipeline {
                 }
             }
         }
+    }
 }
