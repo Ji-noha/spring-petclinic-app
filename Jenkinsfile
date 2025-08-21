@@ -33,73 +33,7 @@ pipeline {
                 bat '.\\mvnw.cmd clean test'
             }
         }
-        /*
-        stage('Run SonarQube') {
-            steps {
-                withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]){
-                    bat """
-                    C:\\sonar-tool\\sonar-scanner-cli-7.2.0.5079-windows-x64.zip ^
-                    -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.java.binaries=target\\classes ^
-                    -Dsonar.host.url=%SONAR_HOST_URL% ^
-                    -Dsonar.login=%SONAR_TOKEN%
-                    """
-                }
-            }
-        }
-        
-        stage('Run SonarQube') {
-            steps {
-                withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
-                        bat """
-                        docker run --rm -e SONAR_HOST_URL=http://127.0.0.1:9000 -e SONAR_LOGIN=%SONAR_TOKEN% -v "%cd%:/usr/src" sonarsource/sonar-scanner-cli ^
-                            -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
-                            -Dsonar.sources=. ^
-                            -Dsonar.java.binaries=target\\classes
-                        """
-                }
-            }
-        }
-        
-        stage('SonarQube Analysis') {
-            steps {
-                // Inject SonarQube environment variables automatically
-                withSonarQubeEnv('spring_pet_server') {
-                    bat 'sonar-scanner'
-                }
-            }
-        } 
-        
-        stage('SonarQube Analysis') {
-            steps {
-                bat '''
-                docker run --rm -v "%cd%:/usr/src" -e SONAR_HOST_URL=http://192.168.8.169:9000 -e SONAR_LOGIN=sonar_token sonarsource/sonar-scanner-cli ^
-                -Dsonar.projectKey=pet_ ^
-                -Dsonar.sources=. ^
-                -Dsonar.java.binaries=target/classes
-                '''
-            }
-        }
-        
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    docker.image('sonarsource/sonar-scanner-cli').inside {
-                        bat """
-                            sonar-scanner ^
-                            -Dsonar.projectKey=YOUR_PROJECT_KEY ^
-                            -Dsonar.sources=. ^
-                            -Dsonar.java.binaries=target/classes ^
-                            -Dsonar.host.url=http://192.168.8.169:9000 ^
-                            -Dsonar.login=YOUR_SONAR_TOKEN ^
-                            -Dcheckstyle.skip=true
-                        """
-                    }
-                }
-            }
-        }
-        */
+
         stage('Set Docker Context') {
             steps {
                 bat 'docker context use default'
@@ -145,6 +79,11 @@ pipeline {
     
     }
     */
-}
+        stage('Deploy') {
+            steps {
+                bat 'docker-compose up -d'
+            }
+        }
+    }
 
 }
