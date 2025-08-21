@@ -127,8 +127,9 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
                 bat """
-                railway login --token %RAILWAY_TOKEN%
-                railway up --service spring-petclinic-app --detach
+                    set RAILWAY_TOKEN=%RAILWAY_TOKEN%
+                    railway whoami
+                    railway up
                 """
                 }
             }
