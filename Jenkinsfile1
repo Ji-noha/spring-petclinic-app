@@ -11,8 +11,7 @@ pipeline {
         stage('Deploy to Railway') {
             steps {
                     bat """
-                    docker run --rm -e RAILWAY_TOKEN=%RAILWAY_TOKEN% -e SERVICE_NAME=%SERVICE_NAME% railway-deploy ^
-                    cmd /c "railway whoami && railway up --service %SERVICE_NAME% --detach"
+                    docker run --rm -e RAILWAY_TOKEN=%RAILWAY_TOKEN% -e SERVICE_NAME=%SERVICE_NAME% railway-deploy sh -c "railway whoami && railway up --service %SERVICE_NAME% --detach"
                     """
                 }
         }
