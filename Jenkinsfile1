@@ -10,6 +10,7 @@ pipeline {
         stage('Test Railway Deploy') {
             steps {
                 bat """
+                railway login --token %TOKEN%
                 railway up --service %SERVICE_NAME% --detach
                 """
 
