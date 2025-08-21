@@ -15,8 +15,8 @@ pipeline {
                     cmd /c "railway whoami && railway up --service %SERVICE_NAME% --detach"
                     """
                 }
-            }
         }
-
     }
+
 }
+
