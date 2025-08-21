@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        /*
+        
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
@@ -20,7 +20,7 @@ pipeline {
                         userRemoteConfigs: [[url: 'https://github.com/Ji-noha/spring-petclinic-app.git']]])
             }
         }
-        */
+        
 
         stage('Build') {
             steps {
@@ -33,7 +33,7 @@ pipeline {
                 bat '.\\mvnw.cmd clean test'
             }
         }
-        /*
+        
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]){
@@ -41,7 +41,7 @@ pipeline {
                 }
             }
         }
-        //
+        /*
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
@@ -122,7 +122,7 @@ pipeline {
                 }
             }
         }
-        */
+        
         stage('Deploy to Railway') {
             steps {
                 withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
@@ -137,5 +137,6 @@ pipeline {
 
     
     }
+    */
 
 }
