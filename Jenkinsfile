@@ -38,7 +38,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]){
                     bat """
-                    C:\\full\\path\\to\\sonar-scanner\\bin\\sonar-scanner.bat ^
+                    C:\\tools\\sonar-scanner\\bin\\sonar-scanner.bat ^
                     -Dsonar.projectKey=%SONAR_PROJECT_KEY% ^
                     -Dsonar.sources=. ^
                     -Dsonar.java.binaries=target\\classes ^
