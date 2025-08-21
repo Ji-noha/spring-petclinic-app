@@ -33,7 +33,7 @@ pipeline {
                 bat '.\\mvnw.cmd clean test'
             }
         }
-        
+        /*
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]){
@@ -48,7 +48,7 @@ pipeline {
                 }
             }
         }
-        /*
+        
         stage('Run SonarQube') {
             steps {
                 withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_TOKEN')]) {
