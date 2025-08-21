@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Deploy to Railway') {
             steps {
-                withCredentials([string(credentialsId: 'RAILWAY_TOKEN', variable: 'TOKEN')]) {
+                withCredentials([string(credentialsId: 'railway-api-token', variable: 'TOKEN')]) {
                     bat """
                     set RAILWAY_TOKEN=%TOKEN%
                     railway whoami
