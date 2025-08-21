@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         SERVICE_NAME = 'spring-petclinic-app'
+        RAILWAY_TOKEN = credentials('api-token-deploy')
     }
     stages {
         stage('Checkout') {
@@ -9,12 +10,9 @@ pipeline {
         }
         stage('Deploy to Railway') {
             steps {
-                withCredentials([string(credentialsId: 'railway-api-token', variable: 'RAILWAY_TOKEN')]) {
                     bat """
-                        docker run --rm ^
-                        -e RAILWAY_TOKEN=%RAILWAY_TOKEN% ^
-                        -e SERVICE_NAME=%SERVICE_NAME% ^
-                        railway-deploy sh -c "railway whoami && railway up --service $SERVICE_NAME --detach"
+                    docker run --rm -e RAILWAY_TOKEN=%RAILWAY_TOKEN% -e SERVICE_NAME=%SERVICE_NAME% railway-deploy ^
+                    cmd /c "railway whoami && railway up --service %SERVICE_NAME% --detach"
                     """
                 }
             }
