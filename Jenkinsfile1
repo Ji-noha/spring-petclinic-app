@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Test Railway Deploy') {
+         stage('Deploy to Railway') {
             steps {
                 withCredentials([string(credentialsId: 'RAILWAY_TOKEN', variable: 'TOKEN')]) {
                     bat """
@@ -15,8 +15,7 @@ pipeline {
                     railway whoami
                     railway up --service spring-petclinic-app --detach
                     """
-
+                }
             }
         }
-    }
 }
