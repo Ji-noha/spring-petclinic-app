@@ -9,9 +9,12 @@ pipeline {
     stages {
         stage('Test Railway Deploy') {
             steps {
-                bat """
-                docker run --rm -e RAILWAY_TOKEN=%RAILWAY_TOKEN% -e SERVICE_NAME=%SERVICE_NAME% node:20-alpine sh -c "npm install -g @railway/cli || true && railway up --service \$SERVICE_NAME --detach"
-                """
+                withCredentials([string(credentialsId: 'RAILWAY_TOKEN', variable: 'TOKEN')]) {
+                    bat """
+                    set RAILWAY_TOKEN=%TOKEN%
+                    railway whoami
+                    railway up --service spring-petclinic-app --detach
+                    """
 
             }
         }
