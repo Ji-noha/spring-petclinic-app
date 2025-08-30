@@ -1,3 +1,37 @@
+# Spring PetClinic- Devops Setup
+This project was originally developed as an open-source Spring Boot application. During my internship, I contributed the DevOps setup to containerize, automate, and deploy the app.
+# Run with Docker 
+```bash
+docker build -t spring-petclinic .
+docker run -p 8080:8080 spring-petclinic
+
+```
+Or with Docker Compose:
+``` bash
+docker-compose up --build
+
+```
+# CI/CD Pipeline with Jenkins
+The Jenkins pipeline automates the following steps:
+
+* Checkout source code
+* Build with Maven
+* Run unit tests
+* Build Docker image
+* Push image to DockerHub
+# Deployment
+* Application deployed manually on Railway
+* Database managed via Aiven MySQL
+* Docker image available on dockerHub:
+``` bash
+docker pull noha04/pet-app:latest
+docker run -p 8080:8080 noha04/pet-app:latest
+
+```
+# Credits 
+* Original Spring PetClinic app by https://github.com/spring-projects/spring-petclinic
+* DevOps integration (Docker, Jenkins pipeline, deployment) by Noha Najmi
+
 # Spring PetClinic Sample Application [![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/maven-build.yml)[![Build Status](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/spring-projects/spring-petclinic/actions/workflows/gradle-build.yml)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spring-projects/spring-petclinic) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=7517918)
